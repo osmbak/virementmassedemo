@@ -1,0 +1,21 @@
+package virement.masse.demo.service;
+
+import virement.masse.demo.dto.consultationrecherche.DetailTransactionRecusRequest;
+import virement.masse.demo.dto.consultationrecherche.DetailsFichierRecusRequest;
+import virement.masse.demo.dto.consultationrecherche.DetailsFichierRecusResponse;
+import virement.masse.demo.dto.consultationrecherche.ListeTransactionsRecusRequest;
+import virement.masse.demo.dto.consultationrecherche.ListeTransactionsRecusResponse;
+import virement.masse.demo.dto.consultationrecherche.RechercheFichiersRecusRequest;
+import virement.masse.demo.dto.consultationrecherche.RechercheFichiersRecusResponse;
+import virement.masse.demo.dto.consultationrecherche.DetailTransactionRecusResponse;
+
+public interface VirementMasseRecusService {
+
+	RechercheFichiersRecusResponse rechercheFichiersRecus(RechercheFichiersRecusRequest request);
+
+	DetailsFichierRecusResponse detailsFichierRecus(DetailsFichierRecusRequest request);
+
+	ListeTransactionsRecusResponse listeTransactionsRecus(ListeTransactionsRecusRequest request);
+
+	DetailTransactionRecusResponse detailTransactionRecus(DetailTransactionRecusRequest request);
+}
