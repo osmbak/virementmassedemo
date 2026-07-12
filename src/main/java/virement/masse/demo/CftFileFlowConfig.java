@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Configuration
 public class CftFileFlowConfig {
 
-	private final String PATH_IN = "N:/CFT/inbox";
-	private final String PATH_ARCHIVE = "N:/CFT/archive";
-	private final String PATH_DUPLICATE = "N:/CFT/duplicates";
-	private final String PATH_ERROR = "N:/CFT/error";
+	private final String PATH_IN = "C:/CFT/inbox";
+	private final String PATH_ARCHIVE = "C:/CFT/archive";
+	private final String PATH_DUPLICATE = "C:/CFT/duplicates";
+	private final String PATH_ERROR = "C:/CFT/error";
 
 	@Autowired
 	private Pacs008StaxParser staxParser;

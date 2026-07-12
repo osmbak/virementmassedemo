@@ -1,8 +1,12 @@
 package virement.masse.demo.generateur;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import virement.masse.demo.model.Banque;
 import virement.masse.demo.model.Pain001File;
 import virement.masse.demo.model.Pain001Transaction;
+import virement.masse.demo.repository.BanqueRepository;
+
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.StringWriter;
@@ -12,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.io.StringReader;
 
@@ -21,15 +26,18 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+@AllArgsConstructor
+
 @Component
 public class Pacs008ByBankXmlGenerator {
 
 	private static final String CODE_BANQUE_EMETTRICE = "190";
 	private static final String BIC_EMETTEUR = "BCPOMAMCXXX";
 	private static final String BIC_GSIMT = "GSIMTMA1XXX";
+	private final BanqueRepository  banqueRepository;
 
 	public String generateXml(Pain001File painFile, String bankCode, List<Pain001Transaction> transactions,
-			String generatedMsgId) {
+							  String generatedMsgId) {
 
 		if (painFile == null) {
 			throw new IllegalArgumentException("Pain001File est null");
@@ -92,7 +100,7 @@ public class Pacs008ByBankXmlGenerator {
 	}
 
 	private void writeGroupHeader(XMLStreamWriter writer, String generatedMsgId, List<Pain001Transaction> transactions,
-			String bankCode) throws Exception {
+								  String bankCode) throws Exception {
 
 		writer.writeStartElement("GrpHdr");
 
@@ -100,6 +108,7 @@ public class Pacs008ByBankXmlGenerator {
 		writeElement(writer, "CreDtTm", LocalDateTime.now().toString());
 		writeElement(writer, "NbOfTxs", String.valueOf(transactions.size()));
 		writeElement(writer, "CtrlSum", formatAmount(sumAmount(transactions)));
+		writeElement(writer, "IntrBkSttlmDt", LocalDate.now().toString());
 
 		writer.writeStartElement("SttlmInf");
 
@@ -112,13 +121,14 @@ public class Pacs008ByBankXmlGenerator {
 		writer.writeEndElement(); // SttlmInf
 
 		writeAgent(writer, "InstgAgt", BIC_EMETTEUR, CODE_BANQUE_EMETTRICE);
+
 		writeAgent(writer, "InstdAgt", BIC_GSIMT, bankCode);
 
 		writer.writeEndElement(); // GrpHdr
 	}
 
 	private void writeTransaction(XMLStreamWriter writer, Pain001Transaction tx, String bankCode, String generatedMsgId,
-			int sequence) throws Exception {
+								  int sequence) throws Exception {
 
 		writer.writeStartElement("CdtTrfTxInf");
 
@@ -130,7 +140,7 @@ public class Pacs008ByBankXmlGenerator {
 
 		writer.writeStartElement("PmtTpInf");
 		writeElement(writer, "InstrPrty", "NORM");
-		writeElement(writer, "ClrChanl", "RTNS");
+		writeElement(writer, "ClrChanl", "GSIMT – PVM");
 
 		writer.writeStartElement("SvcLvl");
 		writeElement(writer, "Prtry", "PB2B");
@@ -155,11 +165,25 @@ public class Pacs008ByBankXmlGenerator {
 		writeElement(writer, "ChrgBr", "SLEV");
 
 		writeAgent(writer, "InstgAgt", BIC_EMETTEUR, CODE_BANQUE_EMETTRICE);
-		writeAgent(writer, "InstdAgt", BIC_GSIMT, bankCode);
+		Optional<Banque> banq  = banqueRepository.findById(bankCode);
+		writeAgent(writer, "InstdAgt", banq.get().getBic(), bankCode);
 
 		writer.writeStartElement("Dbtr");
+
+
 		writeElement(writer, "Nm", safe(tx.getDebtorName()));
+		writer.writeStartElement("Id");
+		writer.writeStartElement("PrvtId");
+		writer.writeStartElement("Othr");
+
+
+		writeElement(writer, "Id", "MA");
+		writer.writeEndElement();
+		writer.writeEndElement();
+
+		writer.writeEndElement();
 		writeElement(writer, "CtryOfRes", "MA");
+
 		writer.writeEndElement();
 
 		writeAccountOther(writer, "DbtrAcct", safe(tx.getDebtorIban()), safe(tx.getCurrency(), "MAD"));
@@ -192,7 +216,8 @@ public class Pacs008ByBankXmlGenerator {
 	private void writeAgent(XMLStreamWriter writer, String tagName, String bic, String memberId) throws Exception {
 		writer.writeStartElement(tagName);
 		writer.writeStartElement("FinInstnId");
-
+		Optional<Banque> banq  = banqueRepository.findById(writer.get);
+		writeAgent(writer, "InstdAgt", banq.get().getBic(), bankCode);
 		writeElement(writer, "BICFI", bic);
 
 		writer.writeStartElement("ClrSysMmbId");
@@ -218,9 +243,14 @@ public class Pacs008ByBankXmlGenerator {
 		writer.writeEndElement();
 		writer.writeEndElement();
 
-		writer.writeStartElement("Tp");
-		writeElement(writer, "Prtry", "RIB");
-		writer.writeEndElement();
+		//10-07-2026 anuulation de champs /CdtrAcct/Tp/Prtry
+
+	//	writer.writeStartElement("Tp");
+
+
+
+	//	writeElement(writer, "Prtry", "RIB");
+	//	writer.writeEndElement();
 
 		writeElement(writer, "Ccy", currency);
 

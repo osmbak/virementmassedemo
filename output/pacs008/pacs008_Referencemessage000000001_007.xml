@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.08">
     <FIToFICstmrCdtTrf>
         <GrpHdr>
-            <MsgId>19000717320260000000000000000000002</MsgId>
-            <CreDtTm>2026-06-22T10:18:11.560285600</CreDtTm>
+            <MsgId>19000719120260000000000000000000002</MsgId>
+            <CreDtTm>2026-07-10T16:14:24.408483800</CreDtTm>
             <NbOfTxs>2</NbOfTxs>
             <CtrlSum>300.30</CtrlSum>
+            <IntrBkSttlmDt>2026-07-10</IntrBkSttlmDt>
             <SttlmInf>
                 <SttlmMtd>CLRG</SttlmMtd>
                 <ClrSys>
@@ -38,11 +39,11 @@
             <PmtId>
                 <InstrId>InstrId02</InstrId>
                 <EndToEndId>EndToEndId02</EndToEndId>
-                <TxId>19000717320260000000000000000000001</TxId>
+                <TxId>19000719120260000000000000000000001</TxId>
             </PmtId>
             <PmtTpInf>
                 <InstrPrty>NORM</InstrPrty>
-                <ClrChanl>RTNS</ClrChanl>
+                <ClrChanl>GSIMT – PVM</ClrChanl>
                 <SvcLvl>
                     <Prtry>PB2B</Prtry>
                 </SvcLvl>
@@ -54,7 +55,7 @@
                 </CtgyPurp>
             </PmtTpInf>
             <IntrBkSttlmAmt Ccy="MAD">200.20</IntrBkSttlmAmt>
-            <IntrBkSttlmDt>2026-06-22</IntrBkSttlmDt>
+            <IntrBkSttlmDt>2026-07-10</IntrBkSttlmDt>
             <ChrgBr>SLEV</ChrgBr>
             <InstgAgt>
                 <FinInstnId>
@@ -69,7 +70,7 @@
             </InstgAgt>
             <InstdAgt>
                 <FinInstnId>
-                    <BICFI>GSIMTMA1XXX</BICFI>
+                    <BICFI>BCMAMAMCXXX</BICFI>
                     <ClrSysMmbId>
                         <ClrSysId>
                             <Prtry>GSIMT</Prtry>
@@ -80,6 +81,13 @@
             </InstdAgt>
             <Dbtr>
                 <Nm>STE VIVALIS SALAF</Nm>
+                <Id>
+                    <PrvtId>
+                        <Othr>
+                            <Id>MA</Id>
+                        </Othr>
+                    </PrvtId>
+                </Id>
                 <CtryOfRes>MA</CtryOfRes>
             </Dbtr>
             <DbtrAcct>
@@ -88,9 +96,6 @@
                         <Id>190780131211995795045381</Id>
                     </Othr>
                 </Id>
-                <Tp>
-                    <Prtry>RIB</Prtry>
-                </Tp>
                 <Ccy>MAD</Ccy>
             </DbtrAcct>
             <DbtrAgt>
@@ -120,9 +125,6 @@
                         <Id>007780000129403009000620</Id>
                     </Othr>
                 </Id>
-                <Tp>
-                    <Prtry>RIB</Prtry>
-                </Tp>
                 <Ccy>MAD</Ccy>
             </CdtrAcct>
             <RmtInf>
@@ -133,11 +135,11 @@
             <PmtId>
                 <InstrId>InstrId01</InstrId>
                 <EndToEndId>EndToEndId01</EndToEndId>
-                <TxId>19000717320260000000000000000000002</TxId>
+                <TxId>19000719120260000000000000000000002</TxId>
             </PmtId>
             <PmtTpInf>
                 <InstrPrty>NORM</InstrPrty>
-                <ClrChanl>RTNS</ClrChanl>
+                <ClrChanl>GSIMT – PVM</ClrChanl>
                 <SvcLvl>
                     <Prtry>PB2B</Prtry>
                 </SvcLvl>
@@ -149,7 +151,7 @@
                 </CtgyPurp>
             </PmtTpInf>
             <IntrBkSttlmAmt Ccy="MAD">100.10</IntrBkSttlmAmt>
-            <IntrBkSttlmDt>2026-06-22</IntrBkSttlmDt>
+            <IntrBkSttlmDt>2026-07-10</IntrBkSttlmDt>
             <ChrgBr>SLEV</ChrgBr>
             <InstgAgt>
                 <FinInstnId>
@@ -164,7 +166,7 @@
             </InstgAgt>
             <InstdAgt>
                 <FinInstnId>
-                    <BICFI>GSIMTMA1XXX</BICFI>
+                    <BICFI>BCMAMAMCXXX</BICFI>
                     <ClrSysMmbId>
                         <ClrSysId>
                             <Prtry>GSIMT</Prtry>
@@ -175,6 +177,13 @@
             </InstdAgt>
             <Dbtr>
                 <Nm>STE VIVALIS SALAF</Nm>
+                <Id>
+                    <PrvtId>
+                        <Othr>
+                            <Id>MA</Id>
+                        </Othr>
+                    </PrvtId>
+                </Id>
                 <CtryOfRes>MA</CtryOfRes>
             </Dbtr>
             <DbtrAcct>
@@ -183,9 +192,6 @@
                         <Id>190780131211995795045381</Id>
                     </Othr>
                 </Id>
-                <Tp>
-                    <Prtry>RIB</Prtry>
-                </Tp>
                 <Ccy>MAD</Ccy>
             </DbtrAcct>
             <DbtrAgt>
@@ -215,9 +221,6 @@
                         <Id>007780000115230031001564</Id>
                     </Othr>
                 </Id>
-                <Tp>
-                    <Prtry>RIB</Prtry>
-                </Tp>
                 <Ccy>MAD</Ccy>
             </CdtrAcct>
             <RmtInf>

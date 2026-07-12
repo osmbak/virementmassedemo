@@ -142,6 +142,8 @@
             <xs:enumeration value="RTNS"/>
             <xs:enumeration value="MPNS"/>
             <xs:enumeration value="BOOK"/>
+            <xs:enumeration value="GSIMT – PVM"/>
+
         </xs:restriction>
     </xs:simpleType>
     <xs:complexType name="ClearingSystemIdentification2Choice">

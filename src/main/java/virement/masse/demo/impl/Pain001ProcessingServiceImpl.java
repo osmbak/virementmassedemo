@@ -146,6 +146,8 @@ public class Pain001ProcessingServiceImpl implements Pain001ProcessingService {
 
 				String xml = pacs008ByBankXmlGenerator.generateXml(pain001File, bankCode, transactions, generatedMsgId);
 
+				//10-07-2026 desactivation validation
+
 				pacs008XsdValidator.validate(xml);
 
 				String fileName = "pacs008_" + cleanFileName(pain001File.getMsgId()) + "_" + cleanFileName(bankCode)
